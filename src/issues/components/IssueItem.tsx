@@ -4,34 +4,35 @@ import { GithubIssue, State } from '../interfaces';
 import { useQueryClient } from '@tanstack/react-query';
 import { getIssue, getIssueComments } from '../../actions';
 
-
 interface IssueItemProps {
   issue: GithubIssue;
 }
 
-export const IssueItem = ({issue}:IssueItemProps) => {
+export const IssueItem = ({ issue }: IssueItemProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient(); // esto nos permite acceder a la cache de react-query
 
   const prefetchData = () => {
     queryClient.prefetchQuery({
-      queryKey: ["issue", issue.number],
+      queryKey: ['issue', issue.number],
       queryFn: () => getIssue(issue.number),
       staleTime: 1000 * 60,
     });
     queryClient.prefetchQuery({
-      queryKey: ["issue", issue.number, "comments"],
+      queryKey: ['issue', issue.number, 'comments'],
       queryFn: () => getIssueComments(issue.number),
       staleTime: 1000 * 60,
     });
-    };
+  };
+
+  const;
 
   return (
-    <div 
-    onMouseEnter={prefetchData}
-    className="animate-fadeIn flex items-center px-2 py-3 mb-5 border rounded-md bg-slate-900 hover:bg-slate-800">
+    <div
+      onMouseEnter={prefetchData}
+      className="animate-fadeIn flex items-center px-2 py-3 mb-5 border rounded-md bg-slate-900 hover:bg-slate-800"
+    >
       {issue.state === State.Close ? (
-        
         <FiCheckCircle size={30} color="green" className="min-w-10" />
       ) : (
         <FiInfo size={30} color="red" className="min-w-10" />
@@ -46,7 +47,6 @@ export const IssueItem = ({issue}:IssueItemProps) => {
         </a>
         <span className="text-gray-500">
           #${issue.number} opened 2 days ago by ${issue.user.login}
-          
           <span className="font-bold">segfaulty1</span>
         </span>
       </div>

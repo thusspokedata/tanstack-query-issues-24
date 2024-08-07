@@ -8,7 +8,6 @@ export const IssueView = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-
   const issueNumber = Number(params.id ?? 0);
 
   const { issueQuery, commentsQuery } = useIssue(issueNumber);
@@ -33,20 +32,15 @@ export const IssueView = () => {
         </button>
       </div>
 
-      
       <IssueComment issue={issueQuery.data} />
 
-      {
-        commentsQuery.isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          commentsQuery.data?.map((comment) => (
-            <IssueComment key={comment.id} issue={comment} />
-          ))
-        )
-      }
-
-  
+      {commentsQuery.isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        commentsQuery.data?.map((comment) => (
+          <IssueComment key={comment.id} issue={comment} />
+        ))
+      )}
     </div>
   );
 };

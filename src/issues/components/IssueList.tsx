@@ -5,7 +5,7 @@ interface Props {
   issues: GithubIssue[];
 }
 
-export const IssueList = ({issues}:Props) => {
+export const IssueList = ({ issues }: Props) => {
   return (
     <>
       {/* Botones de All, Open, Closed */}
