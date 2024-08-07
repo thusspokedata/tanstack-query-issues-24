@@ -1,10 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
-import { getIssues } from '../actions/get-issues.action';
+import { useQuery } from "@tanstack/react-query";
+import { State } from "../issues/interfaces";
+import { getIssues } from "../actions";
 
-export const useIssues = () => {
+
+interface UseIssuesProps {
+  state: State;
+}
+
+export const useIssues = ({ state }: UseIssuesProps) => {
   const issuesQuery = useQuery({
-    queryKey: ['issues'],
-    queryFn: getIssues,
+    queryKey: ['issues', {state}],
+    queryFn: () => getIssues(state),
     staleTime: 1000 * 60, // 1 minute
   });
 
