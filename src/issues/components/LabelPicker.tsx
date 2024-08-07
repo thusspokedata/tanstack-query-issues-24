@@ -1,5 +1,6 @@
-import { useLabels } from "../../hooks/useLabels";
-import { LoadingSpinner } from "../../shared/components/LoadingSpinner";
+import { useLabels } from "../../hooks";
+import { LoadingSpinner } from "../../shared";
+
 
 
 

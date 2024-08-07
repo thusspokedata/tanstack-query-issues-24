@@ -1,9 +1,8 @@
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { IssueComment } from '../components/IssueComment';
 import { FiSkipBack } from 'react-icons/fi';
-import { useIssue } from '../../hooks/useIssue';
-import { LoadingSpinner } from '../../shared/components/LoadingSpinner';
-
+import { useIssue } from '../../hooks';
+import { IssueComment } from '../components';
+import { LoadingSpinner } from '../../shared';
 
 export const IssueView = () => {
   const navigate = useNavigate();

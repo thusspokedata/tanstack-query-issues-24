@@ -1,4 +1,4 @@
-import { GithubIssue } from '../interfaces/issue.interface';
+import { GithubIssue } from '../interfaces';
 import { IssueItem } from './IssueItem';
 
 interface Props {

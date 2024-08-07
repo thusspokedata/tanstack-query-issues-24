@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { GithubIssue } from '../interfaces/issue.interface';
+import { GithubIssue } from '../interfaces';
+
 
 interface Props {
   issue: GithubIssue;

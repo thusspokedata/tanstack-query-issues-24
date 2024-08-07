@@ -15,3 +15,7 @@ Repositorio del proyecto del curso sobre TanStack Query con React
 - TailwindCSS
 - React Router 6+
 - React Icons
+
+
+section 5:
+onMouseEnter
