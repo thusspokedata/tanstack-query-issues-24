@@ -8,6 +8,7 @@ export const getIssues = async (state: State, selectedLabels: string[]): Promise
   await sleep(1);
 
   const params = new URLSearchParams(); // esto no hace falta importarlo, ya que es una clase nativa de JS
+  console.log("params4", params)
 
   if (state !== State.All) {
     params.append('state', state);

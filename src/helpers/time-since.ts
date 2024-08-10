@@ -1,4 +1,4 @@
-export const timeSince = (date: string) => {
+export const timeSince = (date: string | Date) => {
   const baseDate = new Date(date);
 
   const seconds = Math.floor(

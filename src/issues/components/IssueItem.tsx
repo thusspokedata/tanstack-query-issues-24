@@ -1,8 +1,10 @@
 import { FiInfo, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import { GithubIssue, State } from '../interfaces';
 import { useQueryClient } from '@tanstack/react-query';
 import { getIssue, getIssueComments } from '../../actions';
+import { GithubIssue, State } from '../interfaces';
+import { timeSince } from '../../helpers';
+
 
 interface IssueItemProps {
   issue: GithubIssue;
@@ -18,6 +20,7 @@ export const IssueItem = ({ issue }: IssueItemProps) => {
       queryFn: () => getIssue(issue.number),
       staleTime: 1000 * 60,
     });
+
     queryClient.prefetchQuery({
       queryKey: ['issue', issue.number, 'comments'],
       queryFn: () => getIssueComments(issue.number),
@@ -31,7 +34,6 @@ export const IssueItem = ({ issue }: IssueItemProps) => {
     });
     // queryClient.setQueryData(['issue', issue.number, 'comments'], []);
   }
-
 
 
   return (
@@ -54,9 +56,22 @@ export const IssueItem = ({ issue }: IssueItemProps) => {
           {issue.title}
         </a>
         <span className="text-gray-500">
-          #${issue.number} opened 2 days ago by ${issue.user.login}
+          #{issue.number} opened {timeSince(issue.created_at)} days ago by {issue.user.login}
           <span className="font-bold">segfaulty1</span>
         </span>
+        <div className='flex fles-wrap'>
+          {issue.labels.map((label) => (
+            <span
+              key={label.id}
+              className="px-2 py-1 mx-1 text-xs text-white bg-gray-500 rounded-md"
+              style={{
+                border: `1px solid #${label.color}`,
+              }}
+            >
+              {label.name}
+            </span>
+          ))}
+        </div>
       </div>
 
       <img

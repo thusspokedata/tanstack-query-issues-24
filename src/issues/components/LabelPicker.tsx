@@ -12,6 +12,8 @@ export const LabelPicker = ({
 }: LabelPickerProps) => {
   const { labelsQuery } = useLabels();
 
+  console.log(labelsQuery)
+
   if (labelsQuery.isLoading) {
     return (
       <span className="flex justify-center items-center h-52">
@@ -19,6 +21,7 @@ export const LabelPicker = ({
       </span>
     );
   }
+
   return (
     <div className="flex flex-wrap gap-2 justify-start">
       {labelsQuery.data?.map((label) => (
