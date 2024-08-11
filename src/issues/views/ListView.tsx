@@ -10,7 +10,6 @@ export const ListView = () => {
 
   const { issuesQuery } = useIssues({ state, selectedLabels });
 
-
   const issues = issuesQuery.data ?? [];
   // el isLoading va a mostrarse si no tenemos datos en cache, si tenemos datos en cache no se va a mostrar. Esa es la diferencia con el isFetching
 
@@ -28,7 +27,19 @@ export const ListView = () => {
         {issuesQuery.isLoading ? (
           <LoadingSpinner />
         ) : (
-          <IssueList issues={issues} onStateChange={setState} state={state} />
+          <>
+            <IssueList issues={issues} onStateChange={setState} state={state} />
+
+            <div className="flex justify-between items-center">
+              <button className="btn p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all">
+                Anteriores
+              </button>
+              <span>{1}</span>
+              <button className="btn p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all">
+                Siguientes
+              </button>
+            </div>
+          </>
         )}
       </div>
 

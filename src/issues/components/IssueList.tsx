@@ -1,7 +1,6 @@
 import { IssueItem } from '.';
 import { GithubIssue, State } from '../interfaces';
 
-
 interface Props {
   issues: GithubIssue[];
   state: State;
@@ -9,7 +8,6 @@ interface Props {
 }
 
 export const IssueList = ({ issues, onStateChange, state }: Props) => {
-
   return (
     <>
       {/* Botones de All, Open, Closed */}
