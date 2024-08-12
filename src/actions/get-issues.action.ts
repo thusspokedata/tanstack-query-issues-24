@@ -4,7 +4,7 @@ import { GithubIssue, State } from '../issues/interfaces';
 
 
 
-export const getIssues = async (state: State, selectedLabels: string[]): Promise<GithubIssue[]> => {
+export const getIssues = async (state: State, selectedLabels: string[], page: number): Promise<GithubIssue[]> => {
   await sleep(1);
 
   const params = new URLSearchParams(); // esto no hace falta importarlo, ya que es una clase nativa de JS
@@ -18,6 +18,7 @@ export const getIssues = async (state: State, selectedLabels: string[]): Promise
     params.append('labels', selectedLabels.join(','));
   }
 
+  params.append("page", page.toString());
   params.append('per_page', '5'); 
 
   const { data } = await githubApi.get<GithubIssue[]>('/issues', {
