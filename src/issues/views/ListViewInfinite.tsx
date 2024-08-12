@@ -13,7 +13,10 @@ export const ListViewInfinite = () => {
     selectedLabels,
   });
 
-  const issues = issuesQuery.data ?? [];
+  // inicialmente la info era un array de arrays, [ [1,2,3], [4,5,6] ]
+  // pero ahora es un array de objetos, por eso se usa flat para aplanar el array
+  // ejemplo: [ {id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6} ]
+  const issues = issuesQuery.data?.pages.flat() ?? [];
   // el isLoading va a mostrarse si no tenemos datos en cache, si tenemos datos en cache no se va a mostrar. Esa es la diferencia con el isFetching
 
   const onLabelSelected = (label: string) => {
@@ -33,8 +36,16 @@ export const ListViewInfinite = () => {
           <div className="flex flex-col justify-center">
             <IssueList issues={issues} onStateChange={setState} state={state} />
 
-            <button className="btn p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all">
-              Cargar más...
+            <button
+              onClick={() => issuesQuery.fetchNextPage()}
+              disabled={!issuesQuery.hasNextPage || issuesQuery.isFetchingNextPage}
+              className="btn p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all disabled:bg-gray-500"
+            >
+              {issuesQuery.isFetchingNextPage
+                ? 'Cargando...'
+                : issuesQuery.hasNextPage
+                ? 'Cargar más'
+                : 'No hay más issues'}
             </button>
           </div>
         )}
